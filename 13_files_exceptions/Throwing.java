@@ -1,3 +1,6 @@
+// we can use the * in our imports to import all classes in the module
+// typically we only want to do this when we are using a large percentage
+// of classes in the module to avoid importing things we do not need
 import java.io.*;
 
 public class Throwing {

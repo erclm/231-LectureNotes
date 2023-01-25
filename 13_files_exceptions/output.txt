@@ -1,0 +1,4 @@
+Let's write out a simple string!
+Name: Kiefer
+House: Gryffindor
+On Quidditch Team: false
