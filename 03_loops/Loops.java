@@ -3,69 +3,67 @@ import java.util.Scanner;
 
 public class Loops {
     public static void main(String[] args) {
-        /* Random Number Generation
-           - similar to Scanner, we create a generator object of class Random
-           - based off a seed, so considered "pseudo-random"
+        /* WHILE LOOPS 
+           - similar to python syntax
+           - run as long as a condition is true
+           - can use break and continue keywords
+           - (break stops the loop, continue skips to the next iteration)
+           - potential for an infinite loop, so just make sure
+           there is a stopping condition
         */
-        Random numberGenerator = new Random();
-        // min number possible is always 0 (you can add to the number to offset this)
-        // pass in max number (non-inclusive)
-        // leave parentheses blank to include all possible ints
-        int randomNumber = numberGenerator.nextInt(100) + 1; // original range is 0 -> 99, we offset by 1 to get range 1 -> 100
-        System.out.println("Computer generated ~{ " + randomNumber + " }~");
-        
-        // set up our user input like we covered last class
+        // generates a random number between 1 and 10
+        // allow the user to guess until they get it right
+        // tell the user if they're right or wrong after each guess
         Scanner in = new Scanner(System.in);
-        System.out.print("Guess a number: ");
+        Random randy = new Random();
+        // save the generated number to a variable
+        // param is a non-inclusive max, shift up by 1
+        int generated = randy.nextInt(10) + 1; 
+        System.out.println("Randy Gave Us: " + generated);
+        System.out.print("Guess a number between 1 and 10: ");
         int guess = in.nextInt();
-        System.out.println("You guessed |[ " + guess + " ]|");
+        System.out.println("You guessed: " + guess);
 
-        /* While Loops */
-        // we can use != or == here because both are primitive types
-        while (guess != randomNumber) {
-            // runs as long as above is true
-            System.out.println(":(  WRONG  ):");
-            System.out.print("Guess a number: ");
-            guess = in.nextInt(); // stopping condition
-        } 
-        // runs after loop completion
-        System.out.println("!!!!! WINNER !!!!!");
+        while (guess != generated) {
+            // tell the user they're wrong
+            System.out.println("WRONG! :(");
+            // allow them to guess again
+            System.out.print("Guess again: ");
+            guess = in.nextInt();
+        }
+        System.out.println("WINNER!!!!!");
 
-        /* For Loops 
-           - yes, they are wacky, but they give you more control
-           - consist of three statements: 
-                1) declaring & initializing your controlling variable
-                2) setting your stopping condition
-                3) writing your increment statement
-
+        /* 
+            FOR LOOPS
+            - consist of 3 statements
+            1) declare and initialize your controlling variable (iterator)
+            2) sets up the stopping condition
+            3) your increment statement 
         */
         int flirtLevel = 10;
         String message = "hey";
-        for (int i = 0; i < flirtLevel; i++){
+        // build the message string 
+        // by adding a y for each flirt level
+        for (int i = 0; i < flirtLevel; i+=2) {
             message += "y";
         }
         System.out.println("New Message: " + message);
 
-        /* More String Methods 
-          - .contains()
-          - .indexOf()
-          - .replace()
-          - toUpperCase() toLowerCase()
-        */
-        String data = "movies,movies,books,movies,books,books";
-        // does "tv" exist in the data?
-        String searchTerm = "tv";
-        System.out.println(data.contains(searchTerm));
-
-        // get position of first "books"
-        System.out.println(data.indexOf("books"));
-
-        // change whole string to capital letters
+        /* Commonly Used String Methods */
+        String data = "movies,movies,books,movies,books";
+        // what is the first letter of the string?
+        System.out.println(data.charAt(0));
+        // does the substring "tv" exist in the string data?
+        System.out.println(data.contains("tv"));
+        // where is the first occurrence of "books" ?
+        // return -1 if not in the string
+        System.out.println(data.indexOf("books")); 
+        // normalize the case of the string
         System.out.println(data.toUpperCase());
-        System.out.println(data); // not modified in place
-
-        // change all instances of a substring to something else
-        System.out.println(data.replace("movies", "poetry"));
-        System.out.println(data); // again, not modified in place
+        System.out.println(data.toLowerCase());
+        // change all occurrences of "movies" to "poetry"
+        System.out.println(data.replace("movies","poetry"));
+        // data = data.replace("movies","poetry"); // re-assign to permanently change
+        System.out.println(data); // original value, not modifying it in place
     }
 }
