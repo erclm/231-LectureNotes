@@ -1,103 +1,126 @@
 public class Methods {
-  /*
-   * This is your main method
-   * that takes in a String array as a param
-   * and returns nothing (void)
-   * 
-   * It is public,
-   * meaning it has no access restrictions
-   * and static,
-   * meaning you do not need a "calling object"
-   * to use the method.
-   * (think how we use Scanner vs how we use Math)
-   */
+  /* 
+    Methods
+    - thinking about inputs and outputs
+
+    - access modifier (public/private/protected)
+      - public means there are no access restrictions
+      - private means it can only be executed within the class
+      in which it is defined
+    - static means you do not need a calling object to execute
+    the methods 
+      - Scanner and Random methods are NOT static 
+    - return type 
+      - void means there is nothing returned
+      - all returns have to be the same specified type
+    - method name (camelCase)
+    - inside parentheses is a comma seperated list of parameters
+      - each param needs the type and name
+  */
   public static void main(String[] args) {
-    /*
-     * this is the method body
-     * we can call other methods from within this method body
-     */
-    System.out.println(Methods.sum(12, 5));
-    int[] nums = { 4, 8, 15, 16, 23, 42 };
-    System.out.println(Methods.sum(nums));
-    // since yell() is a void method, we just call it
-    Methods.yell("I love methods");
+    /* method body */ 
+    // Methods.yell("I hate coding"); //method call
+    // Methods.yell();
 
-    int[] cleared = Methods.zero(nums);
+    // Methods.sum(4,5); // evaluate to 9
+    // int result = Methods.sum(4,5); // save returned value to variable
+    // System.out.println(Methods.sum(4,5)); // pass the result into another method
 
+    int[] numbers = {5,5,5};
+    // System.out.println(Methods.sum(numbers));
+
+    int[] clearedArray = Methods.zero(numbers);
+
+    System.out.println("CLEARED ARRAY");
     System.out.print("[");
-    for (int i = 0; i < cleared.length; ++i) {
-      System.out.print(cleared[i] + ",");
+    for (int i : clearedArray) {
+      System.out.print(i + " ");
     }
     System.out.println("]");
 
-    // we check the value of nums now, it is also cleared
-    System.out.println(Methods.sum(nums));
-    System.out.print("[ ");
-    for (int i = 0; i < nums.length; ++i) {
-      System.out.print(nums[i] + " ");
+    System.out.println("ORIGINAL ARRAY");
+    System.out.print("[");
+    for (int i : numbers) {
+      System.out.print(i + " ");
     }
     System.out.println("]");
 
-    Methods.yell();
   }
 
-  /* VOID METHODS
-   * a void message returns no value,
-   * it only performs a function
-   */
-  private static void yell(String message) {
-    System.out.println(message.toUpperCase() + "!!!!!");
+  /* VOID METHODS 
+    methods that perform an action
+    instead of returning a value
+  */
+  private static void yell(String message) { // method definition
+    System.out.println(message.toUpperCase() + "!!!");
   }
 
-  /* METHODS THAT RETURN A VALUE
-   * our new method add,
-   * that takes in two integers as params
-   * and returns a single integer
-   */
+  /* 
+    Java does not allow you to set default parameters,
+    BUT you can accomplish the same thing with overloaded methods
+  */
+  private static void yell() {
+    // wrap the original method
+    // with the desired default value passed in
+    Methods.yell("AHHHHH");
+  }
+
+
+  /* 
+    METHODS THAT RETURN A VALUE
+  */
+  // write a method that takes in two integers
+  // and returns their sum
   private static int sum(int n1, int n2) {
     return n1 + n2;
   }
 
-  /*
-   * OVERLOADED METHODS
-   * - in Java, you can have multiple methods with the same name
-   * - must differ in type or number of params, not just return type
-   * - binding is the process of connecting a method call with its body
-   * - overloaded methods that are private and/or static
-   * are an example of "early-binding" because the binding happens
-   * at compile time. We will learn about "late-binding" later.
-   */
-  private static int sum(int[] nums) {
-    int sum = 0;
-    for (int i : nums) {
-      sum += i;
-    }
-    return sum;
-  }
-
-    /* 
-    YOU CANNOT SET DEFAULT PARAMETERS IN JAVA
-    but you can use an overloaded method to essentially
-    do the same thing
+  /* 
+    OVERLOADED METHODS
+    - Java allows you to have multiple methods with the same name
+    and different expected arguments
+    - either differ in types of arguments or number of arguments
+    - the return type is allowed to be different but cannot be the only difference
+    - process of mapping a method call to the appropriate body is called "binding"
+      in Java there is early and late binding, all private/static/overloaded methods
+      implement early binding (happens at compile time)
   */
-  private static void yell() {
-    System.out.println("AHHHHHHH!!!!!!");
+  private static int sum(int[] nums) {
+    int total = 0;
+    for (int i : nums) {
+      total += i;
+    }
+    return total;
   }
 
-  /**
-   * PASSING BY REFERENCE VS VALUE
-   * Primitive types are passed into methods by value. Modifying them
-   * within the method won't modify the original value that was passed in. This is
-   * NOT the same for objects or other reference types (like arrays)
-   * Objects and other reference types are passed by REFERENCE, meaning you will
-   * modify the object in place within the method unless you make a copy
-   */
+  /* 
+    PASSING BY REFERENCE VS VALUE
+    - primitive types are passed by value
+    (if you modify them, it will not modify the original)
+    - reference types (arrays, Objects) are passed by reference
+    (will modify the original)
+  */
+  // private static int[] zero(int[] arrayToClear) {
+  //   // modifies the original array in place
+  //   for (int i=0; i < arrayToClear.length; ++i) {
+  //     arrayToClear[i] = 0;
+  //   }
+  //   return arrayToClear;
+  // }
+
   private static int[] zero(int[] arrayToClear) {
-    int[] newArray = arrayToClear; // still not a new array
-    for (int i = 0; i < newArray.length; ++i) {
+    // create new array of same length
+    // to preserve the original array
+    int[] newArray = new int[arrayToClear.length]; 
+    for (int i=0; i < newArray.length; ++i) {
       newArray[i] = 0;
     }
     return newArray;
   }
+
+
+
+
+
 
 }
