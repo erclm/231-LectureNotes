@@ -1,14 +1,17 @@
 public class Driver {
+  /* Our Driver class holds the main method for our program
+  and is where the program actually executes */
   public static void main(String[] args) {
-    Canvas c = new Canvas(10, 10);
-    System.out.println(c);
-    Point p = new Point('&');
-    Point p2 = new Point('$', 5, 8);
-    System.out.println(p);
-    System.out.println(p2);
+      // create our instances of our new Canvas object
+      // new keyword is used to instantiate a new object
+      // put it before the desired constructor
+      Canvas square = new Canvas(); // using default constructor
+      Canvas rectangle = new Canvas(20, 10); // using overloaded constructor
+  
+      square.addCharacter('!', 4, 4); 
 
-    c.addCharacter(p2);
-    c.addCharacter(p);
-    System.out.println(c);
+      // automatically calls the object's toString method
+      System.out.println(square);
+      // System.out.println(rectangle.height());
   }
 }
