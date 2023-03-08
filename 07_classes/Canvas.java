@@ -1,31 +1,47 @@
 /* 
-    An example of using OOP instead of methods
-    to accomplish the same task as MP1
+    Create an Object reporesentation
+    of our Canvas from MP1
 */
 public class Canvas {
     /* 
-        Define our member variables
-        that describe any data associated with 
-        our object
+        Define member variables
+        (all of the data related to our object)
     */
-    private char[][] canvas;
+    private char[][] canvas; 
 
-    /* Our constructors define how an object
-    gets created */
-    // Default: creates square 10x10 canvas
+    /* 
+        Define our constructors
+        (the code that runs when an object gets created)
+    */
+    //  Default: creates a square 10x10 canvas
     public Canvas() {
         canvas = new char[10][10];
         createCanvas();
     }
 
-    // overloaded constructor - allows developer to 
-    // specify the desired width and height of the canvas
+    // Overloaded: creates a canvas with specified width and height
     public Canvas(int width, int height) {
         canvas = new char[height][width];
         createCanvas();
     }
 
-    // private internal method
+    public int height() {
+        return canvas.length;
+    }
+
+    public int width() {
+        return canvas[0].length;
+    }
+
+    // accessors
+    public char[][] getCanvas() {
+        return this.canvas;
+    }
+    // mutators
+    public void setCanvas(char[][] newCanvas) {
+        this.canvas = newCanvas;
+    }
+
     private void createCanvas() {
         for (int row = 0; row < canvas.length; ++row) {
             for (int col = 0; col < canvas[row].length; ++col) {
@@ -48,44 +64,36 @@ public class Canvas {
         canvas[canvas.length - y - 1][x] = emoji;
     }
 
-    /* Accessors and Mutators */
-    // accessor for the canvas member variable
-    public char[][] getCanvas() {
-        return this.canvas;
-    }
-    // mutator for the canvas member variable
-    public void setCanvas(char[][] newCanvas) {
-        this.canvas = newCanvas;
-    }
 
-    /* TODO: create accessors for the width and height 
-        - one method will return the height
-        - one method will return the width
-    */
-    public int width() {
-        return this.canvas[0].length;
-    }
 
-    public int height() {
-        return this.canvas.length;
-    }
+    /* 
+        TODO: make a void method createCanvas
+        that runs at the end of each constructor
+        and adds all of the border decorations
+        to the canvas member variable
 
-    /* TODO: adapt your createCanvas method from homework 
-        so that after each constructor runs, it sets up the borders
+        TODO: modify the toString method to 
+        print out the whole canvas similar to your
+        printCanvas method
+    
+        TODO: add your addCharacter method and modify it
+        to add a character to the canvas member variable
     */
 
-    /* toString method allows us to override what gets printed
-    to the terminal by System.out.print() */
+
+    // toString will ALWAYS have the same signature
+    // Java calls it automatically
+    // when you pass an object into println
     public String toString() {
+        // a canvas of width: 10 and height: 10
         String output = "";
-        for (int i = 0; i < canvas.length; ++i) {            
-            for (int col = 0; col < canvas[i].length; ++ col) {
-                output += " " + canvas[i][col] + " ";
+        for (int outer=0; outer < canvas.length; ++outer) {
+            for (int inner=0; inner < canvas[0].length; ++inner) {
+                output += " " + canvas[outer][inner] + " ";
             }
             output += "\n";
         }
         return output;
     }
-
 
 }
