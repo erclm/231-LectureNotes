@@ -1,12 +1,17 @@
 public class Book {
+    // private member variables
     private String title;
     private String author;
+    // if you have another Object as a member variable
+    // you would have to create a totally new object of that
+    // to create a Deep Copy of your object
+    // private Author author; 
     private boolean isAvailable;
-    // private String[] genres;
 
+    // constructors (default and overloaded and copy)
     public Book() {
-        this.title = "The Color Purple"; // OR null
-        this.author = "Alice Walker"; // OR null
+        this.title = "The Color Purple";
+        this.author = "Alice Walker";
         this.isAvailable = true;
     }
 
@@ -16,28 +21,24 @@ public class Book {
         this.isAvailable = true;
     }
 
-    // copy constructor makes a duplicate of your object
+    // deep copy - totally new object with totally new
+    // object member variables (no shared references)
+    // shallow copy - new object but some references are shared
     public Book(Book bookToCopy) {
-        // deep vs shallow copies
-        // shallow copy means a two objects share some references
-        // deep copy means you create a completely new object with no shared references
-        // this.genres = bookToCopy.genres; // shallow copy
-        // this.genres = new String[bookToCopy.genres.length] // deep copy
-        // for (int i=0; i < this,.genres.length; ++i) {
-        //     this.genres[i] = bookToCopy.genres[i];
-        // }
-        this.title = bookToCopy.title; // bookToCopy.getTitle()
+        this.title = bookToCopy.title;
         this.author = bookToCopy.author;
+        // this.author = new Author(bookToCopy.author);
         this.isAvailable = bookToCopy.isAvailable;
     }
 
+    // accessors and mutators
     public String getTitle() {
         return this.title;
     }
 
-    public void setTitle(String newTitle) {
-        this.title = newTitle;
-    } 
+    public void setTitle(String newValue) {
+        this.title = newValue;
+    }
 
     public String getAuthor() {
         return this.author;
@@ -51,44 +52,32 @@ public class Book {
         return this.isAvailable;
     }
 
-    public void setAvaialable(boolean available) {
-        this.isAvailable = available;
+    public void setAvailable(boolean availability) {
+        this.isAvailable = availability;
     }
 
+    // toString method 
     public String toString() {
-        return this.title + " by " + this.author 
-        + "\n~~~~~~~~~~~~~~~~~~\n"
-        + "Available to Rent: " + isAvailable;
+        return "~~~~~~~~~~~~~~~~~~~~~~\n"
+        + this.title + " by " + this.author
+        + "\nAvailable to Rent: " + this.isAvailable
+        + "\n~~~~~~~~~~~~~~~~~~~~~~";
     }
-
+    // equals method
+    // defines what it means for two books to be equal
     public boolean equals(Object o) {
-        // see if the Object is a Book
         if (!(o instanceof Book)) {
-            return false; // not a book
+            // the object cannot be a book
+            return false;
         } else {
-            // can be a book
-            // type-cast our parameter o Object -> Book ("downcasting")
-            Book other = (Book) o;
-            // two books are equal if their titles and authors match
-            return other.title.equals(this.title) 
-            && other.author.equals(this.author);
+            // the object CAN be a book
+            // "down-cast" o from an Object -> Book
+            Book otherBook = (Book) o;
+            // return true if the titles and authors match
+            // and false if not
+            return this.title.equals(otherBook.title)
+            && this.author.equals(otherBook.author);
+            // && this.isAvailable == otherBook.isAvailable;
         }
-    }
-
-    public static void main(String[] args) {
-        Book defaultBook = new Book();
-        Book overstory = new Book("The Overstory", "Richard Powers");
-        Book copy = new Book(defaultBook);
-        System.out.println(defaultBook.equals(copy));
-
-
-        // overstory.setAvaialable(false);
-
-        // Book copy = new Book(overstory); // deep copy - completely new object
-        // Book notADeepCopy = overstory; // shallow copy - new variable, points to same object
-
-        // // System.out.println(defaultBook);
-        // System.out.println(overstory);
-        // System.out.println(copy);
     }
 }
