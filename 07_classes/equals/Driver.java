@@ -16,5 +16,7 @@ public class Driver {
 
         System.out.println(dandelion.equals(basic));
 
-    }
+        System.out.println("Number of Books Created: " + Book.booksOnPlatform);
+        System.out.println(Book.GENRE);
+    }   
 }

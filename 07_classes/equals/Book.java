@@ -5,20 +5,32 @@ public class Book {
     // if you have another Object as a member variable
     // you would have to create a totally new object of that
     // to create a Deep Copy of your object
-    // private Author author; 
+    // private Author author; (example)
     private boolean isAvailable;
+    /* 
+        Static Member Variables
+        - instead of being unique to each object instance,
+        static member variables are shared between all instances 
+        of a class
+        - the final keyword, that will make a variable a constant
+        so its value cannot be changed
+    */
+    public static int booksOnPlatform = 0;
+    public static final String GENRE = "YA Fiction";
 
     // constructors (default and overloaded and copy)
     public Book() {
         this.title = "The Color Purple";
         this.author = "Alice Walker";
         this.isAvailable = true;
+        booksOnPlatform++;
     }
 
     public Book(String title, String author) {
         this.title = title;
         this.author = author;
         this.isAvailable = true;
+        booksOnPlatform++;
     }
 
     // deep copy - totally new object with totally new
@@ -29,6 +41,7 @@ public class Book {
         this.author = bookToCopy.author;
         // this.author = new Author(bookToCopy.author);
         this.isAvailable = bookToCopy.isAvailable;
+        booksOnPlatform++;
     }
 
     // accessors and mutators
