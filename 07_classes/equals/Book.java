@@ -7,16 +7,20 @@ public class Book {
     // to create a Deep Copy of your object
     // private Author author; (example)
     private boolean isAvailable;
+
     /* 
         Static Member Variables
-        - instead of being unique to each object instance,
-        static member variables are shared between all instances 
-        of a class
-        - the final keyword, that will make a variable a constant
-        so its value cannot be changed
+        - values are shared between all instances of a class
+        instead of being unique to each Object instance
+        - declare and initialize outside a constructor
+        - the final keyword makes a variable a constant, 
+        so the value cannot be updated
     */
+    // every Book shares this value
     public static int booksOnPlatform = 0;
     public static final String GENRE = "YA Fiction";
+
+    
 
     // constructors (default and overloaded and copy)
     public Book() {

@@ -15,8 +15,7 @@ public class Driver {
         // System.out.println(deepCopy);
 
         System.out.println(dandelion.equals(basic));
-
-        System.out.println("Number of Books Created: " + Book.booksOnPlatform);
+        System.out.println("Number of Books created: "+ Book.booksOnPlatform);
         System.out.println(Book.GENRE);
     }   
 }
