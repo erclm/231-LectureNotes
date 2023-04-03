@@ -1,40 +1,44 @@
 /* 
  * Hash Maps
- * - Associative Data Structure
- * (vs a sequential data structure like a list)
- * - stores key/value pairs
- * - designed for a key to map to a value 
- * (not the other way around)
- * - no duplicate keys
+ * - have to import java.util.HashMap before using
+ * - associative data structure (as opposed to a sequential structure like a list)
+ * - organized by key/value pairs
+ * - designed for one way lookup (take the key to lookup the value)
+ * - no duplicate keys (but duplicate values is ok)
  */
 import java.util.HashMap;
 public class Maps {
     public static void main(String[] args) {
-        // create a HashMap
-        // HashMap<TypeOfKey, TypeOfValue>
-        HashMap<String, String> capitals = new HashMap<String,String>();
+        // to create a HashMap, we list HashMap<TypeOfKey, TypeOfValue> 
+        HashMap<String, String> capitals = new HashMap<String, String>();
         System.out.println(capitals);
 
         // add to a HashMap
-        // put TX as a key and Austin as a value into the HashMap
-        capitals.put("TX","Austin");
+        // put TX as a key and Austin as a value
+        capitals.put("TX", "Austin");
         capitals.put("NY","Albany");
+
+        // HashMaps has a toString method, so we can see the key value pairs
+        // {TX=Austin, NY=Albany}
         System.out.println(capitals);
-        
-        // will override if key already exists
-        capitals.put("NY","Manhattan");
+
+        // override a value
+        // if you use put with an existing key, it will update the value
+        // if you use with a new key, it will add to the HashMap
+        capitals.put("NY", "Manhattan");
         System.out.println(capitals);
 
         // retrieve a value by key
-        String capital_of_tx = capitals.get("TX");
-        System.out.println(capital_of_tx);
+        String capitalOfTX = capitals.get("TX"); 
+        System.out.println(capitalOfTX);
 
-        // check if HashMap contains a key or value
+        // check if keys or values are present in a HashMap
         System.out.println(capitals.containsKey("MI"));
         System.out.println(capitals.containsValue("Manhattan"));
 
-        // looping through keys in a HashMaps
-        // use .values() to loop through values
+        // loop through all keys or values in a HashMap
+        // use .values() for values
+        // use .keySet() for keys
         for (String state : capitals.keySet()) {
             System.out.println("Key: " + state);
             System.out.println("The capital of " + state + " is " + capitals.get(state));
