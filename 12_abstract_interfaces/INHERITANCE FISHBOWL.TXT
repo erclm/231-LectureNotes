@@ -1,0 +1,12 @@
+INHERITANCE FISHBOWL (taboo, pictionary, single word)
+Team 1 (Byte)
+5 | 11 | 3 = 19
+
+Team 2 (Yerb)
+4 | 2 | 4 = 10
+
+Team 3 (Mate)
+8 | 3 | 8 = 19
+
+Team 4 (Blub)
+1 | 2 | 3 = 6

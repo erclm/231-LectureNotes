@@ -1,9 +1,7 @@
-// we extend RuntimeException because we do not want to force developers 
-// to have to handle it unless they want to
+// extend from RubtimeException to make an unchecked exception 
+// (extending from Exception directly would create a checked exception)
 public class InvalidArgumentsException extends RuntimeException {
-  public InvalidArgumentsException (String message) {
-        // construct the parent class (RuntimeException)
-        // with the error message passed into this constructor
+    public InvalidArgumentsException(String message) {
         super(message);
     }
 }

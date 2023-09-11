@@ -1,4 +1,19 @@
 Let's write out a simple string!
-Name: Kiefer
+Let's write out a simple string!
+Let's write out a simple string!
+Let's write out a simple string!
+Name: Harry Potter
+House: Gryffindor
+On Quidditch Team: false
+Let's write out a simple string!
+Name: Harry Potter
+House: Slytherin
+On Quidditch Team: false
+Let's write out a simple string!
+Name: Harry Potter
+House: Slytherin
+On Quidditch Team: false
+Let's write out a simple string!
+Name: Harry Potter
 House: Gryffindor
 On Quidditch Team: false

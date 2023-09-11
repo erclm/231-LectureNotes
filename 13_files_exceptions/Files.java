@@ -1,76 +1,80 @@
-
 /* 
-    You will need to have our Book.java class 
-    in this directory for this code to run as is.
+  Since we are using a lot of the classes inside the java io package, 
+  we are going to impor them all
 */
 import java.io.*;
 import java.util.HashMap;
 
 public class Files {
   public static void main(String[] args) {
-    // declare our reader and writer
-    // while you can use Scanner for file IO as well,
-    // we are using some alternative classes that provide more optimizations
-    // behind the scenes
+    // we want to declare this in global scope
+    // but wait to set up the connection inside a try/catch
+    PrintWriter writer = null; 
     BufferedReader reader = null;
-    PrintWriter writer = null;
-    // creating a book object to demonstrate how toString
-    // works with files as well
-    HogwartsStudent cedric = new HogwartsStudent("Cedric", 12);
+    HogwartsStudent student = new HogwartsStudent();
     HashMap<String, Integer> wordCounts = new HashMap<String, Integer>();
 
-    // we must wrap opening files for input or output
-    // in a try/catch block, since their methods throw several Exceptions
     try {
-      // param to FileReader constructor is the local path to the file
-      reader = new BufferedReader(new FileReader("./poem.txt"));
-      String currentLine;
-      // set currentLine to the next line in file
-      // make sure that line is not null
-      // when it's null, there is nothing in the file
+      // set up our connection, potential for an IOException
+      // create a new PrintWriter object - that constructor is going to take a new FileWriter object
+      // FileWriter takes two params - the first is the path to the file, the second is a boolean for appending or not
+      // if the file does not exist, it will create a new one
+      writer = new PrintWriter(new FileWriter("output.txt", true));
+
+      writer.println("Let's write out a simple string!");
+      writer.println(student); // uses the toString method on our object
+
+      // BufferedReader connection can also throw IOExceptions
+      // create a new BufferedReader, constructor accept a FileReader object - just needs a file name
+      // if the file does not exist, throw a FileNotFoundException
+      reader = new BufferedReader(new FileReader("poem.pdf"));
+      String currentLine; // set up our variable so we can assign it the value of each line in the file
+      // while there is still info in the file to read in, 
+      // assign the next line in the file to currentLine variable
+      // once nothing is left in the file, reader.readLine() will return null
       while ((currentLine = reader.readLine()) != null) {
-        String[] words = currentLine.replace(".", "").split("\\s+");
+        String[] words = currentLine.split(" ");
+        // TODO: create a HashMap that maps each word in the file
+        // to the count of the number of times that word is in the file
         for (String word : words) {
-          word = word.replace(",", "").toLowerCase();
+          // see if our hashmap already has this word
+          // if it does, increase the current count by 1
+          // if it doesn't, add the word to the hashmap with a count of 1
           if (wordCounts.containsKey(word)) {
-            wordCounts.put(word, wordCounts.get(word) + 1);
+            int currentCount = wordCounts.get(word);
+            wordCounts.put(word, ++currentCount);
           } else {
             wordCounts.put(word, 1);
           }
-
         }
-        System.out.println(word Counts);
+
       }
 
-     // first param to our FileWriter constructor is the local path to the file
-      // second param is a boolean flag for whether or not to append to the file
-      writer = new PrintWriter(new FileWriter("./output.txt", true));
-      // we can write out strings to files just like to console
-      writer.println("Let's write out a simple string!");
-      // we can also write out objects using their toString method
-      writer.println(friend);
+
+
     } catch (FileNotFoundException e) {
-      // runs if the file does not exist
-      // organize our catch statements my most specific -> lest specific
-      System.err.println("We couldn't find that file.");
+      // FileNotFoundException is a chile of IOException, so it is more specific of an exception
+      // we want to list it first so we can catch it 
+      System.out.println("Could not find that file.");
     } catch (IOException e) {
-      // runs if something else breaks during file i/o
-      System.out.println("Error reading or writing to a file.");
-      System.err.println(e.getMessage());
+      System.out.println("There was an error writing out to that file.");
     } finally {
-      // close our open file connections
+      // close our connections after we open them
+      // because eventually you could hit a limit for number of connections open
       if (writer != null) {
-        // PrintWriter close() does not throw any exceptions
-        writer.close();
+        writer.close(); 
       }
-      // potential IOException that we need to handle
+
+      // the BufferedReader has to be closed in a try/catch
       try {
         if (reader != null) {
           reader.close();
-        }
+        } 
       } catch (IOException e) {
-        System.err.println(e.getMessage());
+        System.out.println("Error when closing the reader.");
       }
+
     }
+    System.out.println(wordCounts);
   }
 }
