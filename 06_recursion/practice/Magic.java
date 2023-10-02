@@ -9,7 +9,6 @@
 public class Magic {
   public static void main(String[] args) {
     int[] numbers = {-10,1,2,7,32,67,100,210,405};
-    int[] numbers = {-100,1,2,3,4,5,6,7,8}
     System.out.println(magicBruteForce(numbers));
     System.out.println(magicIterative(numbers));
     System.out.println(magicNumber(numbers));
