@@ -11,10 +11,14 @@
  */
 public class Recursion {
   public static void main(String[] args) {
-    System.out.println(Recursion.addMeUp(3));
-    System.out.println(Recursion.isPalindrome("MOMMAM"));
-    Recursion.hooray(2);
-    Recursion.writeVertically(450);
+    // System.out.println(Recursion.addMeUp(3));
+    // System.out.println(Recursion.isPalindrome("MOMMAM"));
+    // Recursion.hooray(2);
+    // Recursion.writeVertically(450);
+
+    int[] numbers = {-10, -4, 0, 7, 32, 67, 100, 210, 405};
+    System.out.println(Recursion.magicNumber(numbers));
+    System.out.println(fib(4));
   }
 
   /*
@@ -33,6 +37,15 @@ public class Recursion {
       // we pass in n - 1
       System.out.print(n + "+");
       return n + addMeUp(n - 1);
+    }
+  }
+
+  private static int fib(int n) {
+    System.out.println("Called with " + n);
+    if (n <= 1) {
+      return n;
+    } else {
+      return fib(n-1) + fib(n-2);
     }
   }
 
@@ -69,6 +82,37 @@ public class Recursion {
     } else {
       System.out.print("Hip ");
       hooray(nHips - 1);
+    }
+  }
+
+
+
+  /* 
+    Given an int array, return a "magic number" 
+    where the value matches the index (or -1 if none exist)
+  */
+  private static int magicNumber(int[] array) {
+    return magicNumber(array, 0, array.length - 1);
+  }
+
+  private static int magicNumber(int[] array, int start, int end) {
+    System.out.println("Looking at positions " + start + "-" + end);
+    // start and end are integers
+    // representing the indices we want to search between
+    if (end < start) {
+      return -1; // no magic number present, our search has overlapped
+    }
+    int middle = (start+end) / 2; // find index of middle value
+    System.out.println("Middle is " + middle);
+    if (middle == array[middle]) {
+      return middle; // checking if the middle value is magic
+    }
+    else if (array[middle] > middle) {
+      // search left side, because right side will be too big
+      return magicNumber(array, start, middle-1);
+    } else {
+      // search the right side, because left side will be too small
+      return magicNumber(array, middle+1, end);
     }
   }
 

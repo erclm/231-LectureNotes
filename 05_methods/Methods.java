@@ -1,126 +1,114 @@
 public class Methods {
   /* 
-    Methods
-    - thinking about inputs and outputs
+    METHODS
+    - kinda like functions except they are tied to an object/class
+    - think about input and output
 
-    - access modifier (public/private/protected)
-      - public means there are no access restrictions
-      - private means it can only be executed within the class
-      in which it is defined
-    - static means you do not need a calling object to execute
-    the methods 
-      - Scanner and Random methods are NOT static 
-    - return type 
-      - void means there is nothing returned
-      - all returns have to be the same specified type
-    - method name (camelCase)
-    - inside parentheses is a comma seperated list of parameters
-      - each param needs the type and name
+    - public (access modifier) public/private 
+    - static (no calling object)
+      - Random and Scanner methods are non-static 
+        (randy.nextInt())
+      - static methods can just be called on their own
+    - return type
+      - void means it returns no value
+      - non-void methods specify the type of their value
+    - method name in camelCase
+    - comma separated parameters with each param type and name
   */
   public static void main(String[] args) {
-    /* method body */ 
-    // Methods.yell("I hate coding"); //method call
-    // Methods.yell();
+    // call our methods by passing in arguments to the method name
+    yell("I love coding"); // static methods require no object
+    Methods.yell("I love coding"); // sometimes you will see class name attached 
+    yell(); // call the method with no params
+    // System.out.println(yell("test")); // function has no return value
+    int result = sum(12, 5); // save the return value to a variable
+    System.out.println(sum(12, 5)); // print the return value to the console
 
-    // Methods.sum(4,5); // evaluate to 9
-    // int result = Methods.sum(4,5); // save returned value to variable
-    // System.out.println(Methods.sum(4,5)); // pass the result into another method
+    int[] numbers = { 10, 10, 10 };
+    System.out.println(sum(numbers)); // 30
 
-    int[] numbers = {5,5,5};
-    // System.out.println(Methods.sum(numbers));
+    int[] numbers2 = numbers;
+    zero(numbers2); // sets all values to 0 - modifies the original array
 
-    int[] clearedArray = Methods.zero(numbers);
-
-    System.out.println("CLEARED ARRAY");
-    System.out.print("[");
-    for (int i : clearedArray) {
-      System.out.print(i + " ");
-    }
-    System.out.println("]");
-
-    System.out.println("ORIGINAL ARRAY");
-    System.out.print("[");
-    for (int i : numbers) {
-      System.out.print(i + " ");
-    }
-    System.out.println("]");
+    System.out.println(sum(numbers)); // now the sum is 0
 
   }
 
   /* VOID METHODS 
-    methods that perform an action
+    - typically perform some sort of action
     instead of returning a value
   */
-  private static void yell(String message) { // method definition
-    System.out.println(message.toUpperCase() + "!!!");
+  private static void yell(String message) {
+    System.out.println(message.toUpperCase() + "!!!!!");
   }
 
   /* 
-    Java does not allow you to set default parameters,
-    BUT you can accomplish the same thing with overloaded methods
+    PARAMETER DEFAULTS 
+    are not allowed in Java, but you can accomplish the same functionality
+    by using method overloading
   */
-  private static void yell() {
-    // wrap the original method
-    // with the desired default value passed in
-    Methods.yell("AHHHHH");
-  }
+ private static void yell() { // equivalent of setting default value to "AHHHHHH"
+    // System.out.println("AHHHHHHH!!!");
+    yell("AHHHHHHHH");
+ }
 
-
-  /* 
-    METHODS THAT RETURN A VALUE
-  */
-  // write a method that takes in two integers
-  // and returns their sum
+ /* 
+  METHODS THAT RETURN A VALUE
+ */
   private static int sum(int n1, int n2) {
-    return n1 + n2;
+    return n1 + n2; // output will be the sum of both params
   }
 
-  /* 
-    OVERLOADED METHODS
-    - Java allows you to have multiple methods with the same name
-    and different expected arguments
-    - either differ in types of arguments or number of arguments
-    - the return type is allowed to be different but cannot be the only difference
-    - process of mapping a method call to the appropriate body is called "binding"
-      in Java there is early and late binding, all private/static/overloaded methods
-      implement early binding (happens at compile time)
-  */
-  private static int sum(int[] nums) {
-    int total = 0;
-    for (int i : nums) {
-      total += i;
-    }
-    return total;
-  }
-
-  /* 
-    PASSING BY REFERENCE VS VALUE
-    - primitive types are passed by value
-    (if you modify them, it will not modify the original)
-    - reference types (arrays, Objects) are passed by reference
-    (will modify the original)
-  */
-  // private static int[] zero(int[] arrayToClear) {
-  //   // modifies the original array in place
-  //   for (int i=0; i < arrayToClear.length; ++i) {
-  //     arrayToClear[i] = 0;
-  //   }
-  //   return arrayToClear;
+  // cannot have overloaded method that just differs in return type
+  // private static double sum(int n1, int n2) {
+  //   return (double) n1 + n2;
   // }
 
-  private static int[] zero(int[] arrayToClear) {
-    // create new array of same length
-    // to preserve the original array
-    int[] newArray = new int[arrayToClear.length]; 
-    for (int i=0; i < newArray.length; ++i) {
-      newArray[i] = 0;
-    }
-    return newArray;
+  /* 
+  METHOD OVERLOADING
+  - allows you to have multiple variations of the same method name
+  - must differ in parameters (either type or # of params)
+  - different return type is allowed
+  */
+ private static int sum(int[] nums) {
+  // create a sum variable to keep track of current sum
+  int total = 0;
+  // loop through each element in our array and add it to the sum
+  for (int i : nums) {
+    total += i;
   }
+  // once we are done, return the sum variable
+  return total;
+ }
 
 
+ /* 
+  PASSING IN PRIMITIVES VS REFERENCES
+  - primitive types are passed into methods by value/copy
+    (modifying arguments does not change initial value)
+  - objects & arrays are passed by reference
+    (if you modify the object within the method, it changes the original)
+    - usually you want this to happen, 
+    but if you don't you should make a copy before mdoifying
+//  */
+//   private static int[] zero(int[] arrayToClear) {
+//     // loop through the array and change each value to 0
+//     // return the modified array
+//     for (int i=0; i <arrayToClear.length; ++i) {
+//       arrayToClear[i] = 0;
+//     }
+//     return arrayToClear;
+//   }
 
-
+// this one uses the original to create a second array
+// so that the original is unmodified
+private static int[] zero(int[] arrayToClear) {
+  int[] newArray = new int[arrayToClear.length];
+  for (int i=0; i <newArray.length; ++i) {
+    newArray[i] = 0;
+  }
+  return newArray;
+}
 
 
 }
