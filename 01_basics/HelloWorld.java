@@ -1,5 +1,6 @@
 /** HelloWorld.java
 *   A simple program that says hello and prints out host details.
+*   This does not compile btw
 */
 
 import java.net.InetAddress;
